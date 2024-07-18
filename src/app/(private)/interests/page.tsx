@@ -158,7 +158,7 @@ export default function Interests() {
         <PageTitle text={'Tell us about your interests.'} />
         <PageSubtitle text={'Please choose as many as you like.'} />
       </div>
-      <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
+      <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
         {interestOptions.map((opt, i) => (
           <Card
             key={opt.id}
@@ -169,7 +169,7 @@ export default function Interests() {
             {opt.name}
           </Card>
         ))}
-      </div>
+      </ul>
       <div className="flex gap-x-4 items-center justify-end">
         <Link href={ROUTES.INTERESTS} className="w-1/3">
           <Button type="submit">Skip</Button>

@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { BaseHTMLAttributes, KeyboardEvent } from 'react';
 
-interface CardProps extends BaseHTMLAttributes<HTMLBaseElement> {
+interface CardProps extends BaseHTMLAttributes<HTMLLIElement> {
   onClick?: () => void;
   i: number;
   active?: boolean;
@@ -14,7 +14,7 @@ export default function Card({ onClick, i, active, children }: CardProps) {
   const hoverStyles = 'hover:bg-green-md hover:text-white hover:border-green-md';
   const activeStyles = 'border-blue-dark bg-blue-dark text-blue-md';
 
-  const onEnter = (e: KeyboardEvent<HTMLDivElement>) => {
+  const onEnter = (e: KeyboardEvent<HTMLLIElement>) => {
     if (onClick) {
       if (e.key === '13' || e.keyCode === 13) {
         onClick?.();
@@ -23,7 +23,7 @@ export default function Card({ onClick, i, active, children }: CardProps) {
   };
 
   return (
-    <div
+    <li
       className={classnames({
         [baseStyles]: true,
         [hoverStyles]: true,
@@ -41,6 +41,6 @@ export default function Card({ onClick, i, active, children }: CardProps) {
         : {})}
     >
       {children}
-    </div>
+    </li>
   );
 }
