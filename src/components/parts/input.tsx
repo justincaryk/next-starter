@@ -1,61 +1,69 @@
 'use client';
 
 import classnames from 'classnames';
-import { InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes, useState } from 'react';
+import { FieldError } from 'react-hook-form';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  label?: string;
-  autoFocus?: boolean;
+const baseInputStyles =
+  'h-10 px-3 py-1.5 w-full text-gray-700 bg-white border border-solid rounded transition ease-in-out m-0 focus:outline-none bg-clip-padding';
+const cleanStyles = 'border-gray-300  focus:border-blue-md ';
+const errorStyles = 'border-red-error  focus:border-red-error ';
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  errors?: FieldError;
 }
 
-export const baseInputClasses =
-  'h-10 px-3 py-1.5 text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-blue-md focus:outline-none';
-export const baseInputClassesFullWidth = `${baseInputClasses} block w-full`;
+const Input = React.forwardRef(
+  ({ type, errors, ...rest }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+    const [revealed, setRevealed] = useState(false);
 
-export default function Input({ className, autoFocus = false, ...rest }: InputProps) {
-  const [revealed, setRevealed] = useState(false);
+    const togglePasswordReveal = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+      e.stopPropagation();
+      setRevealed(!revealed);
+    };
 
-  const togglePasswordReveal = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    e.stopPropagation();
-    setRevealed(!revealed);
-  };
-
-  if (rest.type === 'password') {
-    return (
-      <div
-        className={classnames({
-          'w-full flex justify-end items-center relative': true,
-          [className ?? '']: className ? true : false,
-        })}
-      >
-        <input
-          autoFocus={autoFocus}
+    if (type === 'password') {
+      return (
+        <div
           className={classnames({
-            [baseInputClassesFullWidth]: true,
+            'w-full flex justify-end items-center relative': true,
           })}
-          {...rest}
-          type={revealed ? 'text' : 'password'}
-        />
-        <img
-          className="w-8 absolute right-2 cursor-pointer opacity-50"
-          src={revealed ? 'icons/eye-slash.svg' : 'icons/eye.svg'}
-          onClick={togglePasswordReveal}
-          alt={revealed ? 'hide password' : 'show password'}
-        />
-      </div>
-    );
-  }
+        >
+          <input
+            ref={ref}
+            className={classnames({
+              [baseInputStyles]: true,
+              [cleanStyles]: !errors?.message,
+              [errorStyles]: errors?.message,
+            })}
+            {...rest}
+            type={revealed ? 'text' : 'password'}
+          />
+          <img
+            className="w-8 absolute right-2 cursor-pointer opacity-50"
+            src={revealed ? 'icons/eye-slash.svg' : 'icons/eye.svg'}
+            onClick={togglePasswordReveal}
+            alt={revealed ? 'hide password' : 'show password'}
+          />
+        </div>
+      );
+    }
 
-  return (
-    <input
-      autoFocus={autoFocus}
-      type="text"
-      className={classnames({
-        [baseInputClassesFullWidth]: true,
-        [className ?? '']: className ? true : false,
-      })}
-      {...rest}
-    />
-  );
-}
+    return (
+      <input
+        ref={ref}
+        type="text"
+        className={classnames({
+          [baseInputStyles]: true,
+          [cleanStyles]: !errors?.message,
+          [errorStyles]: errors?.message,
+        })}
+        {...rest}
+      />
+    );
+  },
+);
+
+Input.displayName = 'Input';
+
+export default Input;
