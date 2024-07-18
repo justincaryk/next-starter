@@ -7,8 +7,10 @@ const colors = {
   'blue-x-dark': 'rgb(4,33,47)',
   'green-md': 'rgb(122,211,42)',
   'green-dark': 'rgb(71,165,28)',
-  'orange-pop': 'rgb(234,92,10)',
+  'orange-pop': 'rgb(250,102,16)',
+  'red-error': 'rgb(171,17,30)',
 };
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
