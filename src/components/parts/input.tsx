@@ -2,13 +2,19 @@
 
 import classnames from 'classnames';
 import React, { InputHTMLAttributes, useState } from 'react';
+import { FieldError } from 'react-hook-form';
 
-export const baseInputClasses =
-  'h-10 px-3 py-1.5 w-full text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:border-blue-md focus:outline-none';
+const baseInputStyles =
+  'h-10 px-3 py-1.5 w-full text-gray-700 bg-white border border-solid rounded transition ease-in-out m-0 focus:outline-none bg-clip-padding';
+const cleanStyles = 'border-gray-300  focus:border-blue-md ';
+const errorStyles = 'border-red-error  focus:border-red-error ';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
-export const Input = React.forwardRef(
-  ({ type, ...rest }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  errors?: FieldError;
+}
+
+const Input = React.forwardRef(
+  ({ type, errors, ...rest }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
     const [revealed, setRevealed] = useState(false);
 
     const togglePasswordReveal = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
@@ -26,7 +32,9 @@ export const Input = React.forwardRef(
           <input
             ref={ref}
             className={classnames({
-              [baseInputClasses]: true,
+              [baseInputStyles]: true,
+              [cleanStyles]: !errors?.message,
+              [errorStyles]: errors?.message,
             })}
             {...rest}
             type={revealed ? 'text' : 'password'}
@@ -46,7 +54,9 @@ export const Input = React.forwardRef(
         ref={ref}
         type="text"
         className={classnames({
-          [baseInputClasses]: true,
+          [baseInputStyles]: true,
+          [cleanStyles]: !errors?.message,
+          [errorStyles]: errors?.message,
         })}
         {...rest}
       />
@@ -55,3 +65,5 @@ export const Input = React.forwardRef(
 );
 
 Input.displayName = 'Input';
+
+export default Input;

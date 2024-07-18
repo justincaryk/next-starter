@@ -9,8 +9,9 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 import Button from '@/components/parts/button';
-import { Input } from '@/components/parts/input';
-import Label from '@/components/parts/label';
+import FormField from '@/components/parts/form-field';
+// import Input from '@/components/parts/input';
+// import Label from '@/components/parts/label';
 import PageTitle from '@/components/parts/page-title';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CREDENTIALS_FORM_FIELDS, CredentialsFormSchema } from '../types';
@@ -37,21 +38,20 @@ export default function Signin() {
       <PageTitle text={'Sign in.'} />
       <div>
         <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
-          <div className="space-y-3">
-            <Label text="Email" />
-            <Input placeholder="email" {...register(CREDENTIALS_FORM_FIELDS.EMAIL)} />
-            <div className="text-red-error">{errors.email?.message}</div>
-          </div>
+          <FormField
+            label="Email"
+            placeholder="email"
+            errors={errors.email}
+            {...register(CREDENTIALS_FORM_FIELDS.EMAIL)}
+          />
 
-          <div className="space-y-3">
-            <Label text="Password" />
-            <Input
-              placeholder="password"
-              type="password"
-              {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
-            />
-            <div className="text-red-error">{errors.password?.message}</div>
-          </div>
+          <FormField
+            label="Password"
+            placeholder="password"
+            type="password"
+            errors={errors.password}
+            {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
+          />
           <Button primary type="submit">
             Submit
           </Button>

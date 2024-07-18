@@ -9,7 +9,8 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 import Button from '@/components/parts/button';
-import { Input } from '@/components/parts/input';
+import FormField from '@/components/parts/form-field';
+import Input from '@/components/parts/input';
 import Label from '@/components/parts/label';
 import PageTitle from '@/components/parts/page-title';
 import ProgressBar from '@/components/parts/progress-bar';
@@ -87,7 +88,7 @@ export default function Signup() {
       <PageTitle text={'Create an account.'} />
       <div>
         <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
-          <div className="space-y-3">
+          {/* <div className="space-y-3">
             <Label text="Email" />
             <Input
               placeholder="email"
@@ -103,7 +104,23 @@ export default function Signup() {
               }}
             />
             <div className="text-red-error">{errors.email?.message}</div>
-          </div>
+          </div> */}
+          <FormField
+            label="Email"
+            placeholder="email"
+            errors={errors.email}
+            {...register(CREDENTIALS_FORM_FIELDS.EMAIL)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              const hasErrors = !!errors.email?.message;
+              const newValue = e.currentTarget.value;
+              setValue(CREDENTIALS_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
+            }}
+            onBlur={() => {
+              const { email } = getValues();
+              setValue(CREDENTIALS_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
+            }}
+          />
+
           <div className="space-y-3">
             <Label text="Password" />
             <Input
