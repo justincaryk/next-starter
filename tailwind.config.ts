@@ -1,5 +1,14 @@
 import type { Config } from 'tailwindcss';
 
+const colors = {
+  'blue-light': 'rgb(43,220,254)',
+  'blue-md': 'rgb(12,176,234)',
+  'blue-dark': 'rgb(6,68,91)',
+  'blue-x-dark': 'rgb(4,33,47)',
+  'green-md': 'rgb(122,211,42)',
+  'green-dark': 'rgb(71,165,28)',
+  'orange-pop': 'rgb(234,92,10)',
+};
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -12,6 +21,9 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: colors,
+      backgroundColor: colors,
+      borderColor: colors,
     },
   },
   plugins: [],

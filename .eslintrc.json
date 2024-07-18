@@ -36,6 +36,6 @@
     "next/core-web-vitals"
   ],
   "rules": {
-    // ...add rules which you'd like to disable
+    "@next/next/no-img-element": "off"
   }
 }
