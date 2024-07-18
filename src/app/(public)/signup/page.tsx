@@ -165,12 +165,13 @@ export default function Signup() {
               placeholder="password"
               errors={errors.password}
               type="password"
+              aria-describedby="password-suggestion"
               {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
               onChange={handlePasswordChange}
               onBlur={handlePasswordFieldBlur}
             />
             <ProgressBar score={passwordScore} />
-            <div className="text-xs text-muted" aria-live="polite">
+            <div className="text-xs text-muted" aria-live="polite" id="password-suggestion">
               {getPasswordAssistText()}
             </div>
           </div>
@@ -181,10 +182,10 @@ export default function Signup() {
         </form>
       </div>
       <div className="w-full">
-        <div className="mb-4 border-t" />
-        <div className="flex justify-center text-sm">
+        {/* <div className="mb-4 border-t" /> */}
+        <div className="pt-4 border-t flex justify-center text-sm">
           Already a user? &nbsp;{' '}
-          <Link href={ROUTES.SIGNIN} className="underline cursor-pointer">
+          <Link href={ROUTES.SIGNIN} className="underline cursor-pointer" role="link">
             Log in
           </Link>
         </div>

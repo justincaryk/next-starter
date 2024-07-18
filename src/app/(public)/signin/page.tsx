@@ -58,10 +58,9 @@ export default function Signin() {
         </form>
       </div>
       <div className="w-full">
-        <div className="mb-4 border-t" />
-        <div className="flex justify-center text-sm">
+        <div className="pt-4 border-t flex justify-center text-sm">
           New to orca learn? &nbsp;{' '}
-          <Link href={ROUTES.SIGNUP} className="underline cursor-pointer">
+          <Link href={ROUTES.SIGNUP} className="underline cursor-pointer" role="link">
             Create an account
           </Link>
         </div>
