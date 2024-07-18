@@ -10,8 +10,6 @@ import * as Yup from 'yup';
 
 import Button from '@/components/parts/button';
 import FormField from '@/components/parts/form-field';
-import Input from '@/components/parts/input';
-import Label from '@/components/parts/label';
 import PageTitle from '@/components/parts/page-title';
 import ProgressBar from '@/components/parts/progress-bar';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -26,7 +24,7 @@ import {
 } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en';
-import { CREDENTIALS_FORM_FIELDS, CredentialsFormSchema } from '../types';
+import { CREDENTIALS_FORM_FIELDS, CredentialsFormSchema, weakPasswordErrorMsg } from '../types';
 
 const options: OptionsType = {
   dictionary: {
@@ -54,6 +52,7 @@ export default function Signup() {
     handleSubmit,
     setValue,
     getValues,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(CredentialsFormSchema),
@@ -65,7 +64,63 @@ export default function Signup() {
     setPasswordFeedback(feedback);
     setPasswordScore(score);
 
-    setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass);
+    // the yup schema was not provided the password match test as the results are needed here
+    // manual validation logic is required here.
+
+    const hasErrors = !!errors.password?.message;
+
+    // use case 1: no errors, just update and exit
+    if (!hasErrors) {
+      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+        shouldValidate: false,
+      });
+      return;
+    }
+
+    // use case 2: has errors and valid => update, clear errors, exit
+    const isStrongEnough = score > 2;
+    const shouldClearErrors = hasErrors && isStrongEnough;
+
+    // if hasErrors and strong enough => clear
+    if (shouldClearErrors) {
+      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+        shouldValidate: true,
+      });
+      return;
+    }
+
+    // use case 3: has errors and still invalid => update state, update errors
+
+    const passwordIsEmpty = !pass;
+
+    // password is empty => use yup to render the default error
+    if (passwordIsEmpty) {
+      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+        shouldValidate: true,
+      });
+      return;
+    } else {
+      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+        shouldValidate: false,
+      });
+      setError(CREDENTIALS_FORM_FIELDS.PASSWORD, { message: weakPasswordErrorMsg });
+    }
+  };
+
+  const handlePasswordFieldBlur = () => {
+    const { password } = getValues();
+    if (password) {
+      const isTooWeak = passwordScore < 3;
+
+      if (isTooWeak) {
+        setError(CREDENTIALS_FORM_FIELDS.PASSWORD, {
+          message: weakPasswordErrorMsg,
+        });
+      }
+    } else {
+      // using setValue to allow react-hook-form to render to yup error message
+      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, password, { shouldValidate: true });
+    }
   };
 
   const getPasswordAssistText = (): string => {
@@ -88,23 +143,6 @@ export default function Signup() {
       <PageTitle text={'Create an account.'} />
       <div>
         <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
-          {/* <div className="space-y-3">
-            <Label text="Email" />
-            <Input
-              placeholder="email"
-              {...register(CREDENTIALS_FORM_FIELDS.EMAIL)}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                const hasErrors = !!errors.email?.message;
-                const newValue = e.currentTarget.value;
-                setValue(CREDENTIALS_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
-              }}
-              onBlur={() => {
-                const { email } = getValues();
-                setValue(CREDENTIALS_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
-              }}
-            />
-            <div className="text-red-error">{errors.email?.message}</div>
-          </div> */}
           <FormField
             label="Email"
             placeholder="email"
@@ -122,16 +160,19 @@ export default function Signup() {
           />
 
           <div className="space-y-3">
-            <Label text="Password" />
-            <Input
+            <FormField
+              label="Password"
               placeholder="password"
+              errors={errors.password}
               type="password"
               {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
               onChange={handlePasswordChange}
+              onBlur={handlePasswordFieldBlur}
             />
             <ProgressBar score={passwordScore} />
             <div className="text-xs text-muted">{getPasswordAssistText()}</div>
           </div>
+
           <Button primary type="submit">
             Register
           </Button>
