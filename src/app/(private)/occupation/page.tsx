@@ -53,24 +53,26 @@ export default function Occupation() {
         <PageTitle text={'Tell us about yourself.'} />
         <PageSubtitle text={'What is your professional background?'} />
       </div>
-      <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
-        {industries.map((industry) => (
+      <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
+        {industries.map((industry, i) => (
           <Card
             key={industry.id}
+            i={i}
             active={industry.id === userIndustry?.id}
             onClick={() => handleIndustryClick(industry)}
           >
             {industry.name}
           </Card>
         ))}
-      </div>
+      </ul>
       <div className="flex gap-x-4 items-center justify-end">
         <Link href={ROUTES.INTERESTS} className="w-1/3">
-          <Button>Skip</Button>
+          <Button type="submit">Skip</Button>
         </Link>
         <div className="w-2/3">
           <Button
             primary
+            type="submit"
             disabled={!userIndustry?.id}
             aria-disabled={!userIndustry?.id}
             onClick={submitOccupation}

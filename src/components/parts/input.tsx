@@ -31,6 +31,8 @@ const Input = React.forwardRef(
         >
           <input
             ref={ref}
+            id={rest.name}
+            aria-invalid={errors?.message ? 'true' : 'false'}
             className={classnames({
               [baseInputStyles]: true,
               [cleanStyles]: !errors?.message,
@@ -52,7 +54,9 @@ const Input = React.forwardRef(
     return (
       <input
         ref={ref}
+        id={rest.name}
         type="text"
+        aria-invalid={errors?.message ? 'true' : 'false'}
         className={classnames({
           [baseInputStyles]: true,
           [cleanStyles]: !errors?.message,
