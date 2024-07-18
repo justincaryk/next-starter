@@ -170,7 +170,9 @@ export default function Signup() {
               onBlur={handlePasswordFieldBlur}
             />
             <ProgressBar score={passwordScore} />
-            <div className="text-xs text-muted">{getPasswordAssistText()}</div>
+            <div className="text-xs text-muted" aria-live="assertive">
+              {getPasswordAssistText()}
+            </div>
           </div>
 
           <Button primary type="submit">

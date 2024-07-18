@@ -159,9 +159,10 @@ export default function Interests() {
         <PageSubtitle text={'Please choose as many as you like.'} />
       </div>
       <div className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
-        {interestOptions.map((opt) => (
+        {interestOptions.map((opt, i) => (
           <Card
             key={opt.id}
+            i={i}
             onClick={() => handleInterestClick(opt)}
             active={userInterestIds.includes(opt.id)}
           >
@@ -171,11 +172,12 @@ export default function Interests() {
       </div>
       <div className="flex gap-x-4 items-center justify-end">
         <Link href={ROUTES.INTERESTS} className="w-1/3">
-          <Button>Skip</Button>
+          <Button type="submit">Skip</Button>
         </Link>
         <div className="w-2/3">
           <Button
             primary
+            type="submit"
             disabled={!userInterestIds.length}
             aria-disabled={!userInterestIds.length}
             onClick={submitInterests}
