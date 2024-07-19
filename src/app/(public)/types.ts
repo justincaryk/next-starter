@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 
 // import { passwordStrength } from 'check-password-strength'
 
-export enum CREDENTIALS_FORM_FIELDS {
+export enum AUTH_FORM_FIELDS {
   EMAIL = 'email',
   PASSWORD = 'password',
 }

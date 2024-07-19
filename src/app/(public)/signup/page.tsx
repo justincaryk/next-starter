@@ -1,6 +1,6 @@
 'use client';
 
-import { ROUTES } from '@/types';
+import { RegisterAccountResponsePayload, ROUTES } from '@/types';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -24,7 +24,7 @@ import {
 } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en';
-import { CREDENTIALS_FORM_FIELDS, CredentialsFormSchema, weakPasswordErrorMsg } from '../types';
+import { AUTH_FORM_FIELDS, CredentialsFormSchema, weakPasswordErrorMsg } from '../types';
 
 const options: OptionsType = {
   dictionary: {
@@ -36,15 +36,35 @@ const options: OptionsType = {
 };
 zxcvbnOptions.setOptions(options);
 
-// TODO: create an API that pretends to sign up and returns a valid JWT
+// TESTING ONLY: email@exists.com will return "email exists error"
+
 export default function Signup() {
   const router = useRouter();
   const [passwordFeedback, setPasswordFeedback] = useState<FeedbackType | null>(null);
   const [passwordScore, setPasswordScore] = useState<Score>(0);
 
-  const trySubmit = (data: Yup.InferType<typeof CredentialsFormSchema>) => {
+  const trySubmit = async (data: Yup.InferType<typeof CredentialsFormSchema>) => {
     console.log('data: ', data);
-    router.push(ROUTES.OCCUPATION);
+    try {
+      const res = await fetch('/api/register-user', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      const status = res.status;
+      const result = (await res.json()) as RegisterAccountResponsePayload;
+
+      if (status === 200) {
+        if (result.code === 'ok') {
+          router.push(ROUTES.OCCUPATION);
+        } else if (result.code === 'email in use') {
+          setError(AUTH_FORM_FIELDS.EMAIL, { message: 'Email is in use. Try another or log in' });
+        }
+      }
+    } catch (error) {
+      // TODO: create general form error state
+      console.error('error', error);
+    }
   };
 
   const {
@@ -71,7 +91,7 @@ export default function Signup() {
 
     // use case 1: no errors, just update and exit
     if (!hasErrors) {
-      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
         shouldValidate: false,
       });
       return;
@@ -83,7 +103,7 @@ export default function Signup() {
 
     // if hasErrors and strong enough => clear
     if (shouldClearErrors) {
-      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
         shouldValidate: true,
       });
       return;
@@ -95,15 +115,15 @@ export default function Signup() {
 
     // password is empty => use yup to render the default error
     if (passwordIsEmpty) {
-      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
         shouldValidate: true,
       });
       return;
     } else {
-      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, pass, {
+      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
         shouldValidate: false,
       });
-      setError(CREDENTIALS_FORM_FIELDS.PASSWORD, { message: weakPasswordErrorMsg });
+      setError(AUTH_FORM_FIELDS.PASSWORD, { message: weakPasswordErrorMsg });
     }
   };
 
@@ -113,13 +133,13 @@ export default function Signup() {
       const isTooWeak = passwordScore < 3;
 
       if (isTooWeak) {
-        setError(CREDENTIALS_FORM_FIELDS.PASSWORD, {
+        setError(AUTH_FORM_FIELDS.PASSWORD, {
           message: weakPasswordErrorMsg,
         });
       }
     } else {
       // using setValue to allow react-hook-form to render to yup error message
-      setValue(CREDENTIALS_FORM_FIELDS.PASSWORD, password, { shouldValidate: true });
+      setValue(AUTH_FORM_FIELDS.PASSWORD, password, { shouldValidate: true });
     }
   };
 
@@ -147,15 +167,15 @@ export default function Signup() {
             label="Email"
             placeholder="email"
             errors={errors.email}
-            {...register(CREDENTIALS_FORM_FIELDS.EMAIL)}
+            {...register(AUTH_FORM_FIELDS.EMAIL)}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               const hasErrors = !!errors.email?.message;
               const newValue = e.currentTarget.value;
-              setValue(CREDENTIALS_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
+              setValue(AUTH_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
             }}
             onBlur={() => {
               const { email } = getValues();
-              setValue(CREDENTIALS_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
+              setValue(AUTH_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
             }}
           />
 
@@ -166,7 +186,7 @@ export default function Signup() {
               errors={errors.password}
               type="password"
               aria-describedby="password-suggestion"
-              {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
+              {...register(AUTH_FORM_FIELDS.PASSWORD)}
               onChange={handlePasswordChange}
               onBlur={handlePasswordFieldBlur}
             />

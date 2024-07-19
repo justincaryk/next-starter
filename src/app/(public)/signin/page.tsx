@@ -1,24 +1,27 @@
 'use client';
 
-import { ROUTES } from '@/types';
+import { ROUTES, SigninResponsePayload } from '@/types';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 import Button from '@/components/parts/button';
 import FormField from '@/components/parts/form-field';
-// import Input from '@/components/parts/input';
-// import Label from '@/components/parts/label';
 import PageTitle from '@/components/parts/page-title';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { CREDENTIALS_FORM_FIELDS, CredentialsFormSchema } from '../types';
+import { AUTH_FORM_FIELDS, CredentialsFormSchema } from '../types';
 
-// TODO: build API that always returns a valid jwt - except with a specific email
+// TESTING ONLY:
+// 1. email@exists.com will return "ok" and move forward
+// 2. email@no-exist.com will return "not found"
+// 3. all other will return "invalid credentials"
+
 export default function Signin() {
   const router = useRouter();
+  const [signinError, setSigninError] = useState('');
 
   const {
     register,
@@ -28,9 +31,30 @@ export default function Signin() {
     resolver: yupResolver(CredentialsFormSchema),
   });
 
-  const trySubmit = (data: Yup.InferType<typeof CredentialsFormSchema>) => {
-    console.log({ data });
-    router.push(ROUTES.OCCUPATION);
+  const trySubmit = async (data: Yup.InferType<typeof CredentialsFormSchema>) => {
+    console.log('data: ', data);
+    try {
+      const res = await fetch('/api/sign-in', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      const status = res.status;
+      const result = (await res.json()) as SigninResponsePayload;
+
+      if (status === 200) {
+        if (result.code === 'ok') {
+          router.push(ROUTES.OCCUPATION);
+        } else if (result.code === 'invalid credentials') {
+          setSigninError('The email or password is incorrect');
+        } else if (result.code === 'no user found') {
+          setSigninError('No user was found');
+        }
+      }
+    } catch (err) {
+      // TODO: set general error
+      console.error('error: ', err);
+    }
   };
 
   return (
@@ -42,7 +66,7 @@ export default function Signin() {
             label="Email"
             placeholder="email"
             errors={errors.email}
-            {...register(CREDENTIALS_FORM_FIELDS.EMAIL)}
+            {...register(AUTH_FORM_FIELDS.EMAIL)}
           />
 
           <FormField
@@ -50,8 +74,13 @@ export default function Signin() {
             placeholder="password"
             type="password"
             errors={errors.password}
-            {...register(CREDENTIALS_FORM_FIELDS.PASSWORD)}
+            {...register(AUTH_FORM_FIELDS.PASSWORD)}
           />
+
+          <div className="text-red-error" role="alert">
+            {signinError ? signinError : ''}
+          </div>
+
           <Button primary type="submit">
             Submit
           </Button>

@@ -1,6 +1,6 @@
 'use client';
 
-import { ROUTES } from '@/types';
+import { Industry, ROUTES } from '@/types';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -10,27 +10,7 @@ import Button from '@/components/parts/button';
 import Card from '@/components/parts/card';
 import PageSubtitle from '@/components/parts/page-subtitle';
 import PageTitle from '@/components/parts/page-title';
-
-// TODO build API to get these results
-// TODO build API to post user choice
-type Industry = {
-  id: number;
-  name: string;
-};
-const industries: Industry[] = [
-  { id: 1, name: 'Marketing' },
-  { id: 2, name: 'Product and Design' },
-  { id: 3, name: 'Engineering' },
-  { id: 4, name: 'Operations' },
-  { id: 5, name: 'IT and Support' },
-  { id: 6, name: 'Sales and Account Mgmt' },
-  { id: 7, name: 'HR and Legal' },
-  { id: 8, name: 'Creative Production' },
-  { id: 9, name: 'Customer Service' },
-  { id: 10, name: 'Finance' },
-  { id: 11, name: 'Manufacturing' },
-  { id: 12, name: 'Other' },
-];
+import { industries } from '@/mocks';
 
 export default function Occupation() {
   const router = useRouter();
@@ -41,6 +21,7 @@ export default function Occupation() {
   };
 
   const submitOccupation = () => {
+    console.log('user occupation: ', userIndustry);
     if (!userIndustry?.id) {
       return;
     }
