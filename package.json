@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "husky:init": "husky .husky",
     "husky:pre-commit": "echo 'npx lint-staged' > .husky/pre-commit",
     "husky:prepare": "yarn husky:init && yarn husky:pre-commit",
+    "format": "prettier .",
     "format:write": "prettier --write .",
+    "lint": "next lint",
     "lint:fix": "yarn lint --fix .",
     "test": "jest",
     "test:watch": "jest --watch"
