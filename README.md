@@ -69,6 +69,7 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
 - [] Input test
 - [] Form Field test
 - [] Progress bar test
+- [] API tests? (they're really just mocks, so not sure it's worth it)
 
 
 ### Thoughts & Considerations
