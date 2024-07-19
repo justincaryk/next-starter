@@ -1,8 +1,10 @@
+import PageTitle from '@/components/parts/page-title';
+
 export default function Dashboard() {
   return (
     <div className="space-y-4">
-      <div className="text-xl">Dashboard</div>
-      <div>Flow complete </div>
+      <PageTitle text="Dashboard" />
+      <div>Flow complete.</div>
     </div>
   );
 }
