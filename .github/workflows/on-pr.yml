@@ -1,5 +1,5 @@
 name: PR Quality Check
-on: [pr]
+on: [pull_request]
 jobs:
   format:
     runs-on: ubuntu-latest
