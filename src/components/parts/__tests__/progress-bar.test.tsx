@@ -21,12 +21,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = [
-      scoreStyle.zero,
-      scoreStyle.zero,
-      scoreStyle.zero,
-      scoreStyle.zero,
-    ];
+    const expectedClasses = [scoreStyle.zero, scoreStyle.zero, scoreStyle.zero, scoreStyle.zero];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -37,12 +32,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = [
-      scoreStyle.one,
-      scoreStyle.zero,
-      scoreStyle.zero,
-      scoreStyle.zero,
-    ];
+    const expectedClasses = [scoreStyle.one, scoreStyle.zero, scoreStyle.zero, scoreStyle.zero];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -53,12 +43,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = [
-      scoreStyle.two,
-      scoreStyle.two,
-      scoreStyle.zero,
-      scoreStyle.zero,
-    ];
+    const expectedClasses = [scoreStyle.two, scoreStyle.two, scoreStyle.zero, scoreStyle.zero];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -69,12 +54,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = [
-      scoreStyle.three,
-      scoreStyle.three,
-      scoreStyle.three,
-      scoreStyle.zero,
-    ];
+    const expectedClasses = [scoreStyle.three, scoreStyle.three, scoreStyle.three, scoreStyle.zero];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -85,12 +65,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = [
-      scoreStyle.four,
-      scoreStyle.four,
-      scoreStyle.four,
-      scoreStyle.four,
-    ];
+    const expectedClasses = [scoreStyle.four, scoreStyle.four, scoreStyle.four, scoreStyle.four];
 
     verifyClassNames(divElements, expectedClasses);
   });

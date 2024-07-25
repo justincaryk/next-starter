@@ -2,19 +2,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-* First, install depedencies the development server:
+- First, install depedencies the development server:
 
 ```bash
 yarn
 ```
 
-* Second, spin up the local instance:
+- Second, spin up the local instance:
 
 ```bash
 yarn dev
 ```
 
-* Third, in a browser, either navigate to `localhost:3000` (this is just a list of all the available routes) or navigate to `localhost:3000/signup` to begin the user flow.
+- Third, in a browser, either navigate to `localhost:3000` (this is just a list of all the available routes) or navigate to `localhost:3000/signup` to begin the user flow.
 
 ## Husky (optional, but recommended)
 
@@ -55,9 +55,9 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
     - `role="alert"` - added to error fields
     - `aria-live="polite"` - added to password
     - linked password hint text with password input
-- cards 
-    - are composed with `<ul>`/`<li>`
-    - added `role='button'` to communicate clickability
+- cards
+  - are composed with `<ul>`/`<li>`
+  - added `role='button'` to communicate clickability
 
 ### color-blindness
 
@@ -70,7 +70,6 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
 - [] Form Field test
 - [] Progress bar test
 - [] API tests? (they're really just mocks, so not sure it's worth it)
-
 
 ### Thoughts & Considerations
 
@@ -93,4 +92,3 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
     - Trimmed interest list based on user's occupation
     - Reordered the interests list such that likely interests given the user's occupation are presented first
 - Mock data can be found in `/src/mocks.ts`
-

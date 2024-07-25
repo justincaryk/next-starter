@@ -30,12 +30,6 @@ export default function Home() {
                 <Link href={ROUTES.SIGNUP}>Log in</Link>
               </li>
               <li>
-                <Link href={ROUTES.OCCUPATION}>Occupation</Link>
-              </li>
-              <li>
-                <Link href={ROUTES.INTERESTS}>Interests</Link>
-              </li>
-              <li>
                 <Link href={ROUTES.DASHBOARD}>
                   Dashboard (only used to complete the user journey)
                 </Link>

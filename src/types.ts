@@ -1,8 +1,6 @@
 export enum ROUTES {
   SIGNUP = 'signup',
   SIGNIN = 'signin',
-  OCCUPATION = 'occupation',
-  INTERESTS = 'interests',
   DASHBOARD = 'dashboard',
 }
 
@@ -10,9 +8,11 @@ export type AuthAccountRequestBody = {
   email: string;
   password: string;
 };
+
 export type RegisterAccountResponsePayload = {
   code: 'ok' | 'email in use';
 };
+
 export type SigninResponsePayload = {
   code: 'ok' | 'invalid credentials' | 'no user found';
 };
