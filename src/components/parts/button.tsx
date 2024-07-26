@@ -15,12 +15,14 @@ export default function Button({ onClick, primary, disabled, className = '', chi
   const bgColor = primary ? 'bg-blue-md' : 'bg-white';
   const txtColor = primary ? 'text-white' : 'text-blue-dark';
   const hoverStyles = `${primary ? 'hover:bg-blue-light' : 'hover:bg-gray-200'}`;
-  const disabledStyles = 'disabled:bg-gray-200 cursor-not-allowed hover:disabled:bg-gray-200';
+  const disabledStyles = disabled
+    ? 'disabled:bg-gray-200 cursor-not-allowed hover:disabled:bg-gray-200'
+    : '';
 
-  const classes = twMerge(baseStyles, bgColor, txtColor, hoverStyles, disabledStyles, className);
+  const classes = twMerge(baseStyles, bgColor, txtColor, disabledStyles, hoverStyles, className);
 
   return (
-    <button onClick={onClick} className={classes} disabled={disabled}>
+    <button onClick={onClick} className={classes} {...(disabled ? { disabled: true } : {})}>
       {children}
     </button>
   );
