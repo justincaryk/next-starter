@@ -3,7 +3,7 @@
 import { RegisterAccountResponsePayload, ROUTES } from '@/types';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -39,12 +39,15 @@ zxcvbnOptions.setOptions(options);
 // TESTING ONLY: email@exists.com will return "email exists error"
 
 export default function Signup() {
-  const router = useRouter();
+  // const router = useRouter();
   const [passwordFeedback, setPasswordFeedback] = useState<FeedbackType | null>(null);
   const [passwordScore, setPasswordScore] = useState<Score>(0);
 
   const trySubmit = async (data: Yup.InferType<typeof CredentialsFormSchema>) => {
-    console.log('data: ', data);
+    if (passwordScore < 3) {
+      return null;
+    }
+
     try {
       const res = await fetch('/api/register-user', {
         method: 'POST',
@@ -56,7 +59,7 @@ export default function Signup() {
 
       if (status === 200) {
         if (result.code === 'ok') {
-          router.push(ROUTES.OCCUPATION);
+          // router.push(ROUTES.OCCUPATION);
         } else if (result.code === 'email in use') {
           setError(AUTH_FORM_FIELDS.EMAIL, { message: 'Email is in use. Try another or log in' });
         }
@@ -84,47 +87,9 @@ export default function Signup() {
     setPasswordFeedback(feedback);
     setPasswordScore(score);
 
-    // the yup schema was not provided the password match test as the results are needed here
-    // manual validation logic is required here.
-
-    const hasErrors = !!errors.password?.message;
-
-    // use case 1: no errors, just update and exit
-    if (!hasErrors) {
-      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
-        shouldValidate: false,
-      });
-      return;
-    }
-
-    // use case 2: has errors and valid => update, clear errors, exit
-    const isStrongEnough = score > 2;
-    const shouldClearErrors = hasErrors && isStrongEnough;
-
-    // if hasErrors and strong enough => clear
-    if (shouldClearErrors) {
-      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
-        shouldValidate: true,
-      });
-      return;
-    }
-
-    // use case 3: has errors and still invalid => update state, update errors
-
-    const passwordIsEmpty = !pass;
-
-    // password is empty => use yup to render the default error
-    if (passwordIsEmpty) {
-      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
-        shouldValidate: true,
-      });
-      return;
-    } else {
-      setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
-        shouldValidate: false,
-      });
-      setError(AUTH_FORM_FIELDS.PASSWORD, { message: weakPasswordErrorMsg });
-    }
+    setValue(AUTH_FORM_FIELDS.PASSWORD, pass, {
+      shouldValidate: true,
+    });
   };
 
   const handlePasswordFieldBlur = () => {
@@ -202,7 +167,6 @@ export default function Signup() {
         </form>
       </div>
       <div className="w-full">
-        {/* <div className="mb-4 border-t" /> */}
         <div className="pt-4 border-t flex justify-center text-sm">
           Already a user? &nbsp;{' '}
           <Link href={ROUTES.SIGNIN} className="underline cursor-pointer" role="link">
