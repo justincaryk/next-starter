@@ -21,7 +21,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = scoreStyle as string[];
+    const expectedClasses = [scoreStyle[0],scoreStyle[0],scoreStyle[0],scoreStyle[0]] as string[];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -32,7 +32,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = scoreStyle as string[];
+    const expectedClasses = [scoreStyle[1],scoreStyle[0],scoreStyle[0],scoreStyle[0]] as string[];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -43,7 +43,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = scoreStyle as string[];
+    const expectedClasses = [scoreStyle[2],scoreStyle[2],scoreStyle[0],scoreStyle[0]] as string[];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -54,7 +54,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = scoreStyle as string[];
+    const expectedClasses = [scoreStyle[3],scoreStyle[3],scoreStyle[3],scoreStyle[0]] as string[];
 
     verifyClassNames(divElements, expectedClasses);
   });
@@ -65,7 +65,7 @@ describe('ProgressBar Component', () => {
     const progressBar = screen.getAllByRole('progressbar');
     const divElements = within(progressBar[0]).getAllByTestId('progress-bar-segment');
 
-    const expectedClasses = scoreStyle as string[];
+    const expectedClasses = [scoreStyle[4],scoreStyle[4],scoreStyle[4],scoreStyle[4]] as string[];
 
     verifyClassNames(divElements, expectedClasses);
   });
