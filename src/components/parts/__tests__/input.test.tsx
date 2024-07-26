@@ -4,6 +4,7 @@ import { FieldError } from 'react-hook-form';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import Input from '../input';
+import Password from '../password';
 
 describe('Input Component', () => {
   const baseInputProps = {
@@ -50,7 +51,7 @@ describe('Input Component', () => {
   });
 
   it('should render a password input with a toggle icon', () => {
-    const { container } = render(<Input type="password" {...baseInputProps} />);
+    const { container } = render(<Password type="password" {...baseInputProps} />);
 
     // password type inputs do not have role='textbox'
     const inputElement = container.querySelector('input');
@@ -62,7 +63,7 @@ describe('Input Component', () => {
   });
 
   it('should toggle password visibility when icon is clicked', () => {
-    const { container } = render(<Input type="password" {...baseInputProps} />);
+    const { container } = render(<Password type="password" {...baseInputProps} />);
 
     const inputElement = container.querySelector('input');
     const iconElement = screen.getByRole('img', { name: 'show password' });
