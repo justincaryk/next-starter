@@ -1,4 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
+'use client';
+
+import React, { InputHTMLAttributes, useImperativeHandle, useRef } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import Input from './input';
@@ -13,15 +15,25 @@ interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const FormField = React.forwardRef(
   ({ label, errors, name, ...rest }: FormFieldProps, ref: React.ForwardedRef<HTMLInputElement>) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
+
+    // Expose the inputRef through the forwarded ref
+    useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
+
+    const handleLabelClick = () => {
+      inputRef?.current?.focus();
+    };
+
     return (
-      <div className="space-y-3">
-        {label ? <Label text={label} htmlFor={name} /> : null}
+      <div className="space-y-2">
+        {label ? <Label text={label} htmlFor={name} onClick={handleLabelClick} /> : null}
         {rest.type === 'password' ? (
           <Password errors={errors} name={name} {...rest} ref={ref} />
         ) : (
           <Input errors={errors} name={name} {...rest} ref={ref} />
         )}
-        <div className="text-red-error" role="alert">
+
+        <div className="text-red-error " role="alert">
           {errors?.message}
         </div>
       </div>
