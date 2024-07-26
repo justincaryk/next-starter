@@ -3,7 +3,7 @@
 import { ROUTES, SigninResponsePayload } from '@/types';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ import Button from '@/components/parts/button';
 import FormField from '@/components/parts/form-field';
 import PageTitle from '@/components/parts/page-title';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { AUTH_FORM_FIELDS, CredentialsFormSchema } from '../types';
+import { AUTH_FORM_FIELDS, SigninSchema } from '../types';
 
 // TESTING ONLY:
 // 1. email@exists.com will return "ok" and move forward
@@ -20,7 +20,7 @@ import { AUTH_FORM_FIELDS, CredentialsFormSchema } from '../types';
 // 3. all other will return "invalid credentials"
 
 export default function Signin() {
-  const router = useRouter();
+  // const router = useRouter();
   const [signinError, setSigninError] = useState('');
 
   const {
@@ -28,10 +28,10 @@ export default function Signin() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(CredentialsFormSchema),
+    resolver: yupResolver(SigninSchema),
   });
 
-  const trySubmit = async (data: Yup.InferType<typeof CredentialsFormSchema>) => {
+  const trySubmit = async (data: Yup.InferType<typeof SigninSchema>) => {
     console.log('data: ', data);
     try {
       const res = await fetch('/api/sign-in', {
@@ -44,7 +44,7 @@ export default function Signin() {
 
       if (status === 200) {
         if (result.code === 'ok') {
-          router.push(ROUTES.OCCUPATION);
+          // router.push(ROUTES.OCCUPATION);
         } else if (result.code === 'invalid credentials') {
           setSigninError('The email or password is incorrect');
         } else if (result.code === 'no user found') {

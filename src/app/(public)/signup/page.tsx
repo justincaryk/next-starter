@@ -24,7 +24,7 @@ import {
 } from '@zxcvbn-ts/core';
 import * as zxcvbnCommonPackage from '@zxcvbn-ts/language-common';
 import * as zxcvbnEnPackage from '@zxcvbn-ts/language-en';
-import { AUTH_FORM_FIELDS, CredentialsFormSchema, weakPasswordErrorMsg } from '../types';
+import { AUTH_FORM_FIELDS, SignupSchema, weakPasswordErrorMsg } from '../types';
 
 const options: OptionsType = {
   dictionary: {
@@ -43,7 +43,7 @@ export default function Signup() {
   const [passwordFeedback, setPasswordFeedback] = useState<FeedbackType | null>(null);
   const [passwordScore, setPasswordScore] = useState<Score>(0);
 
-  const trySubmit = async (data: Yup.InferType<typeof CredentialsFormSchema>) => {
+  const trySubmit = async (data: Yup.InferType<typeof SignupSchema>) => {
     if (passwordScore < 3) {
       return null;
     }
@@ -78,7 +78,7 @@ export default function Signup() {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(CredentialsFormSchema),
+    resolver: yupResolver(SignupSchema),
   });
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
