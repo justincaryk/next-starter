@@ -65,6 +65,7 @@ export default function Signin() {
           <FormField
             label="Email"
             placeholder="email"
+            type='email'
             errors={errors.email}
             {...register(AUTH_FORM_FIELDS.EMAIL)}
           />

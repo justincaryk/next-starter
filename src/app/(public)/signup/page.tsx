@@ -131,6 +131,7 @@ export default function Signup() {
           <FormField
             label="Email"
             placeholder="email"
+            type='email'
             errors={errors.email}
             {...register(AUTH_FORM_FIELDS.EMAIL)}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
