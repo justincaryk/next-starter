@@ -10,10 +10,10 @@ interface CardProps extends BaseHTMLAttributes<HTMLLIElement> {
 }
 
 export default function Card({ onClick, i, active = false, className = '', children }: CardProps) {
-  const baseStyles = 'rounded-lg px-4 py-2 cursor-pointer shadow-md border';
-  const hoverStyles = 'hover:bg-green-md hover:text-white hover:border-green-md';
-  const inactiveStyles = 'border-green-md text-green-md';
-  const activeStyles = 'border-blue-dark bg-blue-dark text-blue-md';
+  const baseStyles = 'rounded-lg px-4 py-2 cursor-pointer shadow-lg border';
+  const hoverStyles = 'hover:bg-blue-light hover:text-blue-dark hover:border-blue-light';
+  const inactiveStyles = 'border-blue-dark bg-blue-dark text-white';
+  const activeStyles = 'border-green-dark bg-green-dark text-white';
 
   const classes = twMerge(
     baseStyles,
