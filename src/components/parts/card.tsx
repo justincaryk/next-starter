@@ -40,6 +40,8 @@ export default function Card({ onClick, i, active = false, className = '', child
             tabIndex: i + 1,
             role: 'button',
             onKeyDown: onEnter,
+            'aria-pressed': active,
+            'aria-live': 'polite',
           }
         : {})}
     >
