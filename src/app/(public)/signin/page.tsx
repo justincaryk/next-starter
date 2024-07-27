@@ -8,8 +8,8 @@ import { FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
-import Button from '@/components/parts/button';
-import FormField from '@/components/parts/form-field';
+import Button from '@/components/parts/form/button';
+import FormField from '@/components/parts/form/form-field';
 import PageTitle from '@/components/parts/page-title';
 import { COMPANY_NAME, ROUTES } from '@/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
