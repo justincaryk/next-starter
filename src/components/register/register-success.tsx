@@ -6,7 +6,11 @@ import PageTitle from '../parts/page-title';
 
 export default function RegisterSuccess() {
   return (
-    <div className="p-6 space-y-10 flex justify-center" aria-live="polite" title='Account successfully created.'>
+    <div
+      className="p-6 space-y-10 flex justify-center"
+      aria-live="polite"
+      title="Account successfully created."
+    >
       <div className="space-y-4 pb-6 border inline-block rounded-b">
         <div className="flex justify-center bg-green-md pb-8 rounded-t">
           <div className="inline-block -mt-10 rounded-full bg-green-md p-1 border-4 border-white">

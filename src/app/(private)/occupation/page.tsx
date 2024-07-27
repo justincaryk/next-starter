@@ -10,8 +10,8 @@ import Button from '@/components/parts/button';
 import Card from '@/components/parts/card';
 import PageSubtitle from '@/components/parts/page-subtitle';
 import PageTitle from '@/components/parts/page-title';
-import { industries } from '@/mocks';
 import { ROUTES } from '@/constants';
+import { industries } from '@/mocks';
 
 export default function Occupation() {
   const router = useRouter();

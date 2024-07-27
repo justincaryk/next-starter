@@ -1,8 +1,8 @@
 'use client';
 
+import Link from 'next/link';
 
 import { ROUTES } from '@/constants';
-import Link from 'next/link';
 
 export default function Home() {
   return (

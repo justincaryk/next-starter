@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 import { Quicksand } from 'next/font/google';
+
 import { COMPANY_NAME } from '@/constants';
 
 const quicksand = Quicksand({

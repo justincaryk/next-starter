@@ -11,7 +11,7 @@ export default function SignupPage() {
   const onFormSubmitSuccess = () => {
     setSuccessfullyRegistered(true);
   };
-  
+
   return (
     <>
       {successfullyRegistered ? (
