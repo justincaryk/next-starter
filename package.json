@@ -9,7 +9,7 @@
     "husky:init": "husky .husky",
     "husky:pre-commit": "echo 'npx lint-staged' > .husky/pre-commit",
     "husky:prepare": "yarn husky:init && yarn husky:pre-commit",
-    "format": "prettier .",
+    "format": "prettier . --check",
     "format:write": "prettier --write .",
     "lint": "next lint",
     "lint:fix": "yarn lint --fix .",
