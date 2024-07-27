@@ -27,7 +27,7 @@ export default function Signin() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(SigninSchema),
   });
@@ -85,7 +85,7 @@ export default function Signin() {
             {signinError ? signinError : ''}
           </div>
 
-          <Button primary type="submit">
+          <Button primary type="submit" loading={isSubmitting}>
             Submit
           </Button>
         </form>
