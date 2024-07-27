@@ -2,21 +2,15 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
 import SignInForm from '@/components/login/login-form';
 import PageTitle from '@/components/parts/page-title';
 import { COMPANY_NAME, ROUTES } from '@/constants';
 
 export default function SigninPage() {
-  const [successfullySignedIn, setSuccessfullySignedIn] = useState(false);
   const router = useRouter();
 
   const onFormSubmitSuccess = () => {
-    setSuccessfullySignedIn(true);
-    // TODO: remove debug
-    console.log(successfullySignedIn);
-
     router.push(ROUTES.DASHBOARD);
   };
 

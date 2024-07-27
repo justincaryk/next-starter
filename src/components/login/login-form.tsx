@@ -48,6 +48,8 @@ export default function LoginForm({ onSuccess }: LoginProps) {
 
       if (status === 200) {
         if (result.code === 'ok') {
+          // TODO: remove artificial timeout
+          await sleep(1500);
           onSuccess();
         } else if (result.code === 'invalid credentials') {
           setSigninError('The email or password is incorrect');

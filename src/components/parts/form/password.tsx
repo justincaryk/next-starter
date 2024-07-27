@@ -1,6 +1,6 @@
 'use client';
 
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { InputHTMLAttributes, KeyboardEvent, useState } from 'react';
 import { FieldError } from 'react-hook-form';
 
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
@@ -14,7 +14,9 @@ const Password = React.forwardRef(
   ({ type, ...rest }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
     const [revealed, setRevealed] = useState(false);
 
-    const togglePasswordReveal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const togglePasswordReveal = (
+      e: React.MouseEvent<SVGSVGElement, MouseEvent> | KeyboardEvent<SVGSVGElement>,
+    ) => {
       e.stopPropagation();
       setRevealed(!revealed);
     };
@@ -35,9 +37,30 @@ const Password = React.forwardRef(
           role="switch"
           aria-checked={revealed}
           aria-live="polite"
-          onClick={togglePasswordReveal}
         >
-          {revealed ? <EyeIcon /> : <EyeSlashIcon />}
+          {revealed ? (
+            <EyeIcon
+              // these props need to be in the icon else, enter to submit in input propagates here.
+              onClick={togglePasswordReveal}
+              onKeyDown={(e) => {
+                if (e.key === '13' || e.keyCode === 13) {
+                  e.stopPropagation();
+                  togglePasswordReveal(e);
+                }
+              }}
+            />
+          ) : (
+            <EyeSlashIcon
+              // these props need to be in the icon else, enter to submit in input propagates here.
+              onClick={togglePasswordReveal}
+              onKeyDown={(e) => {
+                if (e.key === '13' || e.keyCode === 13) {
+                  e.stopPropagation();
+                  togglePasswordReveal(e);
+                }
+              }}
+            />
+          )}
         </button>
       </div>
     );
