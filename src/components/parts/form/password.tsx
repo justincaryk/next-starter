@@ -15,7 +15,7 @@ const Password = React.forwardRef(
     const [revealed, setRevealed] = useState(false);
 
     const togglePasswordReveal = (
-      e: React.MouseEvent<SVGSVGElement, MouseEvent> | KeyboardEvent<SVGSVGElement>,
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent> | KeyboardEvent<HTMLButtonElement>,
     ) => {
       e.stopPropagation();
       setRevealed(!revealed);
@@ -37,30 +37,11 @@ const Password = React.forwardRef(
           role="switch"
           aria-checked={revealed}
           aria-live="polite"
+          onClick={togglePasswordReveal}
+          // do not let it submit the form
+          type="button"
         >
-          {revealed ? (
-            <EyeIcon
-              // these props need to be in the icon else, enter to submit in input propagates here.
-              onClick={togglePasswordReveal}
-              onKeyDown={(e) => {
-                if (e.key === '13' || e.keyCode === 13) {
-                  e.stopPropagation();
-                  togglePasswordReveal(e);
-                }
-              }}
-            />
-          ) : (
-            <EyeSlashIcon
-              // these props need to be in the icon else, enter to submit in input propagates here.
-              onClick={togglePasswordReveal}
-              onKeyDown={(e) => {
-                if (e.key === '13' || e.keyCode === 13) {
-                  e.stopPropagation();
-                  togglePasswordReveal(e);
-                }
-              }}
-            />
-          )}
+          {revealed ? <EyeSlashIcon /> : <EyeIcon />}
         </button>
       </div>
     );

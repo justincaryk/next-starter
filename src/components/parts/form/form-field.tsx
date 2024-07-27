@@ -25,8 +25,7 @@ const FormField = React.forwardRef(
     };
 
     const handleKeydown = (e: KeyboardEvent<HTMLLabelElement>) => {
-      console.log('e: ', e.key);
-      if (e.key === '10' || e.keyCode === 10) {
+      if (e.key === '10' || e.key === 'Enter' || e.keyCode === 10) {
         inputRef?.current?.focus();
       }
     };
