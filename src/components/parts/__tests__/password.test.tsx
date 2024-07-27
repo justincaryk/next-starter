@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { FieldError } from 'react-hook-form';
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import Password from '../password';
+import Password from '../form/password';
 
 describe('Password Component', () => {
   const baseInputProps = {

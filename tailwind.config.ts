@@ -11,6 +11,10 @@ const colors = {
   'red-error': 'rgb(171,17,30)',
 };
 
+const heightExtended = {
+  'screen-1/2': '50vh',
+  'screen-2/3': '75vh',
+};
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -26,6 +30,9 @@ const config: Config = {
       colors: colors,
       backgroundColor: colors,
       borderColor: colors,
+      height: heightExtended,
+      minHeight: heightExtended,
+      maxHeight: heightExtended,
     },
   },
   plugins: [],

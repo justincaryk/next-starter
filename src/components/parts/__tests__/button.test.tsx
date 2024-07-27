@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import Button from '../button';
+import Button from '../form/button';
 
 describe('Button component', () => {
   test('renders the button with children', () => {

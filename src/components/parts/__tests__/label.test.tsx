@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 
 import { render, screen } from '@testing-library/react';
-import Label from '../label';
+import Label from '../form/label';
 
 describe('Label component', () => {
   afterAll(() => {

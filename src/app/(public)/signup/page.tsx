@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import RegisterForm from '@/components/register/register-form';
+import RegisterSuccess from '@/components/register/register-success';
 
 export default function SignupPage() {
   const [successfullyRegistered, setSuccessfullyRegistered] = useState(false);
@@ -10,10 +11,11 @@ export default function SignupPage() {
   const onFormSubmitSuccess = () => {
     setSuccessfullyRegistered(true);
   };
+  
   return (
     <>
       {successfullyRegistered ? (
-        <div className="space-y-10">Successfully registered!</div>
+        <RegisterSuccess />
       ) : (
         <RegisterForm onSuccess={onFormSubmitSuccess} />
       )}

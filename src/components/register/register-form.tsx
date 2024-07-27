@@ -1,18 +1,19 @@
 'use client';
 
-import { RegisterAccountResponsePayload, ROUTES } from '@/types';
+import { RegisterAccountResponsePayload } from '@/types';
 
 import Link from 'next/link';
-// import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 
 import { AUTH_FORM_FIELDS, SignupSchema, weakPasswordErrorMsg } from '@/app/(public)/types';
-import Button from '@/components/parts/button';
-import FormField from '@/components/parts/form-field';
+import Button from '@/components/parts/form/button';
+import FormField from '@/components/parts/form/form-field';
 import PageTitle from '@/components/parts/page-title';
 import ProgressBar from '@/components/parts/progress-bar';
+import { ROUTES } from '@/constants';
+import { sleep } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   FeedbackType,
@@ -43,14 +44,11 @@ interface RegisterFormProps {
 }
 
 export default function RegisterForm({ onSuccess }: RegisterFormProps) {
-  // const router = useRouter();
   const [passwordFeedback, setPasswordFeedback] = useState<FeedbackType | null>(null);
   const [passwordScore, setPasswordScore] = useState<Score>(0);
 
   const trySubmit = async (data: Yup.InferType<typeof SignupSchema>) => {
-    if (passwordScore < 3) {
-      return null;
-    }
+    await sleep(4000);
 
     try {
       const res = await fetch('/api/register-user', {
@@ -63,7 +61,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
 
       if (status === 200) {
         if (result.code === 'ok') {
-          onSuccess()
+          onSuccess();
         } else if (result.code === 'email in use') {
           setError(AUTH_FORM_FIELDS.EMAIL, { message: 'Email is in use. Try another or log in' });
         }
@@ -80,7 +78,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
     setValue,
     getValues,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(SignupSchema),
   });
@@ -128,7 +126,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   };
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-10" aria-live="polite" aria-busy={isSubmitting}>
       <PageTitle text={'Create an account.'} />
       <div>
         <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
@@ -137,6 +135,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
             placeholder="email"
             type="email"
             errors={errors.email}
+            required
             {...register(AUTH_FORM_FIELDS.EMAIL)}
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               const hasErrors = !!errors.email?.message;
@@ -156,6 +155,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
               errors={errors.password}
               type="password"
               aria-describedby="password-suggestion"
+              required
               {...register(AUTH_FORM_FIELDS.PASSWORD)}
               onChange={handlePasswordChange}
               onBlur={handlePasswordFieldBlur}
@@ -166,7 +166,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
             </div>
           </div>
 
-          <Button primary type="submit">
+          <Button primary type="submit" loading={isSubmitting}>
             Register
           </Button>
         </form>

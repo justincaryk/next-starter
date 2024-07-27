@@ -1,6 +1,6 @@
 'use client';
 
-import { ROUTES, SigninResponsePayload } from '@/types';
+import { SigninResponsePayload } from '@/types';
 
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import Button from '@/components/parts/button';
 import FormField from '@/components/parts/form-field';
 import PageTitle from '@/components/parts/page-title';
+import { COMPANY_NAME, ROUTES } from '@/constants';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AUTH_FORM_FIELDS, SigninSchema } from '../types';
 
@@ -65,8 +66,9 @@ export default function Signin() {
           <FormField
             label="Email"
             placeholder="email"
-            type='email'
+            type="email"
             errors={errors.email}
+            required
             {...register(AUTH_FORM_FIELDS.EMAIL)}
           />
 
@@ -75,6 +77,7 @@ export default function Signin() {
             placeholder="password"
             type="password"
             errors={errors.password}
+            required
             {...register(AUTH_FORM_FIELDS.PASSWORD)}
           />
 
@@ -89,7 +92,7 @@ export default function Signin() {
       </div>
       <div className="w-full">
         <div className="pt-4 border-t flex justify-center text-sm">
-          New to orca learn? &nbsp;{' '}
+          New to {COMPANY_NAME}? &nbsp;{' '}
           <Link href={ROUTES.SIGNUP} className="underline cursor-pointer" role="link">
             Create an account
           </Link>

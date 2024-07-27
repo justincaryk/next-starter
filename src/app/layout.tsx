@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 import { Quicksand } from 'next/font/google';
+import { COMPANY_NAME } from '@/constants';
 
 const quicksand = Quicksand({
   weight: '400',
@@ -11,7 +12,7 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: 'Orca Learn',
+  title: COMPANY_NAME,
   description: 'Get to Learning!',
 };
 

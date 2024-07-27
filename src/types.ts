@@ -1,8 +1,3 @@
-export enum ROUTES {
-  SIGNUP = 'signup',
-  SIGNIN = 'signin',
-  DASHBOARD = 'dashboard',
-}
 
 export type AuthAccountRequestBody = {
   email: string;

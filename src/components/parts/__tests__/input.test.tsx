@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { FieldError } from 'react-hook-form';
 
 import { render, screen } from '@testing-library/react';
-import Input from '../input';
+import Input from '../form/input';
 
 describe('Input Component', () => {
   const baseInputProps = {
