@@ -4,12 +4,13 @@ import { InterestOption } from '@/types';
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import Card from '@/components/parts/card';
 import Button from '@/components/parts/form/button';
 import PageSubtitle from '@/components/parts/page-subtitle';
 import PageTitle from '@/components/parts/page-title';
+import SkipLink from '@/components/parts/skip-link';
 import { ROUTES } from '@/constants';
 import { interestOptions } from '@/mocks';
 
@@ -39,10 +40,12 @@ export default function Interests() {
         <PageTitle text={'Tell us about your interests.'} />
         <PageSubtitle text={'Please choose as many as you like.'} />
       </div>
+      <SkipLink href={ROUTES.DASHBOARD} skipLinkText="Skip and go to Dashboard" />
       <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
         {interestOptions.map((opt, i) => (
           <Card
             key={opt.id}
+            id={`card-${i + 1}`}
             i={i}
             onClick={() => handleInterestClick(opt)}
             active={userInterestIds.includes(opt.id)}
@@ -52,7 +55,11 @@ export default function Interests() {
         ))}
       </ul>
       <div className="flex gap-x-4 items-center justify-end">
-        <Link href={ROUTES.DASHBOARD} className="w-1/3">
+        <Link
+          href={ROUTES.DASHBOARD}
+          className="w-1/3"
+          title="Skip interests and go straight to dashboard"
+        >
           <Button type="submit">Skip</Button>
         </Link>
         <div className="w-2/3">

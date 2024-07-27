@@ -1,6 +1,7 @@
+import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-interface TitleProps {
+interface TitleProps extends HTMLAttributes<HTMLDivElement> {
   text: string;
   className?: string;
 }

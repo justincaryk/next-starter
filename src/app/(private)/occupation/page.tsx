@@ -10,6 +10,7 @@ import Card from '@/components/parts/card';
 import Button from '@/components/parts/form/button';
 import PageSubtitle from '@/components/parts/page-subtitle';
 import PageTitle from '@/components/parts/page-title';
+import SkipLink from '@/components/parts/skip-link';
 import { ROUTES } from '@/constants';
 import { industries } from '@/mocks';
 
@@ -35,6 +36,10 @@ export default function Occupation() {
         <PageTitle text={'Tell us about yourself.'} />
         <PageSubtitle text={'What is your professional background?'} />
       </div>
+
+      <SkipLink href={ROUTES.INTERESTS} skipLinkText="Skip and go to Interests List" />
+      <SkipLink href={ROUTES.DASHBOARD} skipLinkText="Skip and go to Dashboard" />
+
       <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
         {industries.map((industry, i) => (
           <Card
