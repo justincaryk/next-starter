@@ -58,6 +58,7 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
 - cards
   - are composed with `<ul>`/`<li>`
   - added `role='button'` to communicate clickability
+- skip links
 
 ### color-blindness
 
@@ -92,3 +93,14 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
     - Trimmed interest list based on user's occupation
     - Reordered the interests list such that likely interests given the user's occupation are presented first
 - Mock data can be found in `/src/mocks.ts`
+
+### TODO:
+
+- [] update card colors for better accessibility
+- [] SSO
+- [] forgot password
+- [] add automated accessibility testing
+- [] finish select dropdown component + tests
+- [] finish checkbox component + tests
+- [] add form tests
+- [] add success state tests for signup page
