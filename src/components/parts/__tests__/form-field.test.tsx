@@ -4,7 +4,7 @@ import React from 'react';
 import { FieldError } from 'react-hook-form';
 
 import { render, screen } from '@testing-library/react';
-import FormField from '../form-field';
+import FormField from '../form/form-field';
 
 // jest.mock('./components', () => ({
 //   Input: jest.fn(({ errors, name, ...rest }) => (
