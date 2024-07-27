@@ -17,7 +17,7 @@ describe('Password Component', () => {
 
     // password type inputs do not have role='textbox'
     const inputElement = container.querySelector('input');
-    const iconElement = screen.getByRole('img', { name: 'show password' });
+    const iconElement = screen.getByRole('switch', { name: 'show password' });
 
     expect(inputElement).toBeInTheDocument();
     expect(iconElement).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('Password Component', () => {
     const { container } = render(<Password {...baseInputProps} />);
 
     const inputElement = container.querySelector('input');
-    const iconElement = screen.getByRole('img', { name: 'show password' });
+    const iconElement = screen.getByRole('switch', { name: 'show password' });
 
     // Initial state
     expect(inputElement).toHaveAttribute('type', 'password');
@@ -36,11 +36,11 @@ describe('Password Component', () => {
     // Click to reveal password
     fireEvent.click(iconElement);
     expect(inputElement).toHaveAttribute('type', 'text');
-    expect(iconElement).toHaveAttribute('alt', 'hide password');
+    expect(iconElement).toHaveAttribute('title', 'hide password');
 
     // Click to hide password
     fireEvent.click(iconElement);
     expect(inputElement).toHaveAttribute('type', 'password');
-    expect(iconElement).toHaveAttribute('alt', 'show password');
+    expect(iconElement).toHaveAttribute('title', 'show password');
   });
 });
