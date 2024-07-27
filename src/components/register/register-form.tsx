@@ -2,7 +2,6 @@
 
 import { RegisterAccountResponsePayload } from '@/types';
 
-import Link from 'next/link';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
@@ -10,9 +9,7 @@ import * as Yup from 'yup';
 import { AUTH_FORM_FIELDS, SignupSchema, weakPasswordErrorMsg } from '@/app/(public)/types';
 import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
-import PageTitle from '@/components/parts/page-title';
 import ProgressBar from '@/components/parts/progress-bar';
-import { ROUTES } from '@/constants';
 import { sleep } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
@@ -126,59 +123,51 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   };
 
   return (
-    <div className="space-y-10" aria-live="polite" aria-busy={isSubmitting}>
-      <PageTitle text={'Create an account.'} />
-      <div>
-        <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
-          <FormField
-            label="Email"
-            placeholder="email"
-            type="email"
-            errors={errors.email}
-            required
-            {...register(AUTH_FORM_FIELDS.EMAIL)}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              const hasErrors = !!errors.email?.message;
-              const newValue = e.currentTarget.value;
-              setValue(AUTH_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
-            }}
-            onBlur={() => {
-              const { email } = getValues();
-              setValue(AUTH_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
-            }}
-          />
+    <form
+      className="space-y-6"
+      onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}
+      aria-live="polite"
+      aria-busy={isSubmitting}
+    >
+      <FormField
+        label="Email"
+        placeholder="email"
+        type="email"
+        errors={errors.email}
+        required
+        {...register(AUTH_FORM_FIELDS.EMAIL)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          const hasErrors = !!errors.email?.message;
+          const newValue = e.currentTarget.value;
+          setValue(AUTH_FORM_FIELDS.EMAIL, newValue, { shouldValidate: hasErrors });
+        }}
+        onBlur={() => {
+          const { email } = getValues();
+          setValue(AUTH_FORM_FIELDS.EMAIL, email, { shouldValidate: true });
+        }}
+      />
 
-          <div className="space-y-3">
-            <FormField
-              label="Password"
-              placeholder="password"
-              errors={errors.password}
-              type="password"
-              aria-describedby="password-suggestion"
-              required
-              {...register(AUTH_FORM_FIELDS.PASSWORD)}
-              onChange={handlePasswordChange}
-              onBlur={handlePasswordFieldBlur}
-            />
-            <ProgressBar score={passwordScore} />
-            <div className="text-xs text-muted" aria-live="polite" id="password-suggestion">
-              {getPasswordAssistText()}
-            </div>
-          </div>
-
-          <Button primary type="submit" loading={isSubmitting}>
-            Register
-          </Button>
-        </form>
-      </div>
-      <div className="w-full">
-        <div className="pt-4 border-t flex justify-center text-sm">
-          Already a user? &nbsp;{' '}
-          <Link href={ROUTES.SIGNIN} className="underline cursor-pointer" role="link">
-            Log in
-          </Link>
+      <div className="space-y-3">
+        <FormField
+          label="Password"
+          placeholder="password"
+          errors={errors.password}
+          type="password"
+          aria-describedby="password-suggestion"
+          required
+          {...register(AUTH_FORM_FIELDS.PASSWORD)}
+          onChange={handlePasswordChange}
+          onBlur={handlePasswordFieldBlur}
+        />
+        <ProgressBar score={passwordScore} />
+        <div className="text-xs text-muted" aria-live="polite" id="password-suggestion">
+          {getPasswordAssistText()}
         </div>
       </div>
-    </div>
+
+      <Button primary type="submit" loading={isSubmitting}>
+        Register
+      </Button>
+    </form>
   );
 }
