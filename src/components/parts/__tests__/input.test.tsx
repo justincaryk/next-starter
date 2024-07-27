@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { axe } from 'jest-axe';
 import { FieldError } from 'react-hook-form';
 
 import { render, screen } from '@testing-library/react';
@@ -17,6 +18,21 @@ describe('Input Component', () => {
     const input = container.querySelector('input');
 
     expect(input).toBeTruthy();
+  });
+
+  it('axe accessibility should be happy', async () => {
+    // this test fails without a label. we're passing one here because
+    // <Input /> should not be rendered directly, rather we expect that
+    // <FormField type='password' /> will be used, which always provides a <label>
+    const { container } = render(
+      <>
+        <label htmlFor={baseInputProps.name}>{baseInputProps.name}</label>
+        <Input {...baseInputProps} />
+      </>,
+    );
+
+    const inputElement = container.querySelector('input') as HTMLInputElement;
+    expect(await axe(inputElement)).toHaveNoViolations();
   });
 
   it('should render with aria-invalid if errors are provided', () => {

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { axe } from 'jest-axe';
 import { FieldError } from 'react-hook-form';
 
 import { fireEvent, render, screen } from '@testing-library/react';
@@ -22,6 +23,21 @@ describe('Password Component', () => {
     expect(inputElement).toBeInTheDocument();
     expect(iconElement).toBeInTheDocument();
     expect(inputElement).toHaveAttribute('type', 'password');
+  });
+
+  it('axe accessibility should be happy', async () => {
+    // this test fails without a label. we're passing one here because
+    // <Password /> should not be rendered directly, rather we expect that
+    // <FormField type='password' /> will be used, which always provides a <label>
+    const { container } = render(
+      <>
+        <label htmlFor={baseInputProps.name}>{baseInputProps.name}</label>
+        <Password {...baseInputProps} />
+      </>,
+    );
+
+    const passwordElement = container.querySelector('input') as HTMLInputElement;
+    expect(await axe(passwordElement)).toHaveNoViolations();
   });
 
   it('should toggle password visibility when icon is clicked', () => {

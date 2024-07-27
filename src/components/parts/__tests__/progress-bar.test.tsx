@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { axe } from 'jest-axe';
 import React from 'react';
 
 import { render, screen, within } from '@testing-library/react';
@@ -14,6 +15,15 @@ describe('ProgressBar Component', () => {
       expect(el).toHaveClass(expectedClasses[index]);
     });
   };
+
+  it('axe accessibility should be happy', async () => {
+    render(<ProgressBar score={0} />);
+
+    const progressBar = screen.getAllByRole('progressbar');
+    for (const elem of progressBar) {
+      expect(await axe(elem)).toHaveNoViolations();
+    }
+  });
 
   it('renders the correct classes for score 0', () => {
     render(<ProgressBar score={0} />);

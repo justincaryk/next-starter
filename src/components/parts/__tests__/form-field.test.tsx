@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { axe } from 'jest-axe';
 import React from 'react';
 import { FieldError } from 'react-hook-form';
 
@@ -30,6 +31,13 @@ describe('FormField Component', () => {
 
     const labelElement = screen.getByText('Username');
     expect(labelElement).toBeInTheDocument();
+  });
+
+  it('axe accessibility should be happy', async () => {
+    render(<FormField {...baseProps} />);
+
+    const labelElement = screen.getByText('Username');
+    expect(await axe(labelElement)).toHaveNoViolations();
   });
 
   it('should not render the label when not provided', () => {
