@@ -12,6 +12,7 @@ import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
 import PageTitle from '@/components/parts/page-title';
 import { COMPANY_NAME, ROUTES } from '@/constants';
+import { sleep } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AUTH_FORM_FIELDS, SigninSchema } from '../types';
 
@@ -34,6 +35,9 @@ export default function Signin() {
 
   const trySubmit = async (data: Yup.InferType<typeof SigninSchema>) => {
     console.log('data: ', data);
+    // TODO: remove artificial timeout
+    await sleep(3000);
+
     try {
       const res = await fetch('/api/sign-in', {
         method: 'POST',
