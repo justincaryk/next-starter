@@ -40,7 +40,10 @@ export default function Occupation() {
       <SkipLink href={ROUTES.INTERESTS} skipLinkText="Skip and go to Interests List" />
       <SkipLink href={ROUTES.DASHBOARD} skipLinkText="Skip and go to Dashboard" />
 
-      <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
+      <div
+        className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4"
+        role="group"
+      >
         {industries.map((industry, i) => (
           <Card
             key={industry.id}
@@ -51,7 +54,7 @@ export default function Occupation() {
             {industry.name}
           </Card>
         ))}
-      </ul>
+      </div>
       <div className="flex gap-x-4 items-center justify-end">
         <Link href={ROUTES.INTERESTS} className="w-1/3">
           <Button type="submit">Skip</Button>

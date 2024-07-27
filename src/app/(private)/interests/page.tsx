@@ -41,7 +41,10 @@ export default function Interests() {
         <PageSubtitle text={'Please choose as many as you like.'} />
       </div>
       <SkipLink href={ROUTES.DASHBOARD} skipLinkText="Skip and go to Dashboard" />
-      <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
+      <div
+        className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4"
+        role="group"
+      >
         {interestOptions.map((opt, i) => (
           <Card
             key={opt.id}
@@ -53,7 +56,7 @@ export default function Interests() {
             {opt.name}
           </Card>
         ))}
-      </ul>
+      </div>
       <div className="flex gap-x-4 items-center justify-end">
         <Link
           href={ROUTES.DASHBOARD}

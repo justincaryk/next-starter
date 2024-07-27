@@ -30,7 +30,7 @@ export default function Card({
     className,
   );
 
-  const onEnter = (e: KeyboardEvent<HTMLLIElement>) => {
+  const onEnter = (e: KeyboardEvent<HTMLDivElement>) => {
     if (onClick) {
       if (e.key === '13' || e.keyCode === 13) {
         onClick?.();
@@ -39,15 +39,15 @@ export default function Card({
   };
 
   return (
-    <li
+    <div
       className={classes}
-      onClick={onClick}
+      role={onClick ? 'button' : 'presentation'}
       id={id}
       // accessibility
       {...(onClick
         ? {
+            onClick: onClick,
             tabIndex: i + 1,
-            role: 'button',
             onKeyDown: onEnter,
             'aria-pressed': active,
             'aria-live': 'polite',
@@ -55,6 +55,6 @@ export default function Card({
         : {})}
     >
       {children}
-    </li>
+    </div>
   );
 }

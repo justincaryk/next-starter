@@ -15,7 +15,12 @@ export default function Label({ text, htmlFor, onClick, ...rest }: LabelProps) {
 
   return (
     <label
-      onClick={onClick}
+      {...(onClick
+        ? {
+            onClick: onClick,
+            onKeyDown: onClick,
+          }
+        : {})}
       {...(!text ? { className: 'sr-only' } : {})}
       htmlFor={htmlFor}
       {...rest}
