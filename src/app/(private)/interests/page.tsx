@@ -39,6 +39,9 @@ export default function Interests() {
         <PageTitle text={'Tell us about your interests.'} />
         <PageSubtitle text={'Please choose as many as you like.'} />
       </div>
+      <a className="sr-only focus:not-sr-only text-4xl" href="#main-content">
+        Skip Navigation
+      </a>
       <ul className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4">
         {interestOptions.map((opt, i) => (
           <Card
