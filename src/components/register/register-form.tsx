@@ -77,6 +77,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm({
+    mode: 'onSubmit',
     resolver: yupResolver(SignupSchema),
   });
 
@@ -128,6 +129,7 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
       onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}
       aria-live="polite"
       aria-busy={isSubmitting}
+      noValidate
     >
       <FormField
         label="Email"

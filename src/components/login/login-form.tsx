@@ -28,6 +28,7 @@ export default function LoginForm({ onSuccess }: LoginProps) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
+    mode: 'onSubmit',
     resolver: yupResolver(SigninSchema),
   });
 
@@ -61,7 +62,11 @@ export default function LoginForm({ onSuccess }: LoginProps) {
   };
 
   return (
-    <form className="space-y-6" onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}>
+    <form
+      className="space-y-6"
+      onSubmit={(e: FormEvent) => void handleSubmit(trySubmit)(e)}
+      noValidate
+    >
       <FormField
         label="Email"
         placeholder="email"
