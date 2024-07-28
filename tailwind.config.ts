@@ -33,6 +33,9 @@ const config: Config = {
       height: heightExtended,
       minHeight: heightExtended,
       maxHeight: heightExtended,
+      fontWeight: {
+        'extra-bold': '800',
+      },
     },
   },
   plugins: [],
