@@ -10,3 +10,5 @@ package-lock.json
 .clj-kondo
 .lsp
 .swc
+
+.env

@@ -1,6 +1,6 @@
 import { LabelHTMLAttributes } from 'react';
 
-import { isEmptyString } from '../../../utils';
+import { isEmptyString } from '../../../utils/utils';
 
 interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   text: string;

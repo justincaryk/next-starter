@@ -7,5 +7,5 @@ interface TitleProps extends HTMLAttributes<HTMLDivElement> {
 }
 export default function PageTitle({ text, className = '' }: TitleProps) {
   const classes = twMerge('text-3xl blue-dark', className);
-  return <div className={classes}>{text}</div>;
+  return <h1 className={classes}>{text}</h1>;
 }

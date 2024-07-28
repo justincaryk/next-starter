@@ -10,7 +10,7 @@ import { AUTH_FORM_FIELDS, SignupSchema, weakPasswordErrorMsg } from '@/app/(pub
 import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
 import ProgressBar from '@/components/parts/progress-bar';
-import { sleep } from '@/utils';
+import { sleep } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   FeedbackType,

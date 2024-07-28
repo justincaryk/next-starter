@@ -14,6 +14,8 @@ describe('ProgressBar Component', () => {
       expect(el).toHaveClass(baseClass);
       expect(el).toHaveClass(expectedClasses[index]);
     });
+
+    return true;
   };
 
   it('axe accessibility should be happy', async () => {
@@ -38,7 +40,7 @@ describe('ProgressBar Component', () => {
       scoreStyle[0],
     ] as string[];
 
-    verifyClassNames(divElements, expectedClasses);
+    expect(verifyClassNames(divElements, expectedClasses)).toBe(true);
   });
 
   it('renders the correct classes for score 1', () => {
@@ -54,7 +56,7 @@ describe('ProgressBar Component', () => {
       scoreStyle[0],
     ] as string[];
 
-    verifyClassNames(divElements, expectedClasses);
+    expect(verifyClassNames(divElements, expectedClasses)).toBe(true);
   });
 
   it('renders the correct classes for score 2', () => {
@@ -70,7 +72,7 @@ describe('ProgressBar Component', () => {
       scoreStyle[0],
     ] as string[];
 
-    verifyClassNames(divElements, expectedClasses);
+    expect(verifyClassNames(divElements, expectedClasses)).toBe(true);
   });
 
   it('renders the correct classes for score 3', () => {
@@ -86,7 +88,7 @@ describe('ProgressBar Component', () => {
       scoreStyle[0],
     ] as string[];
 
-    verifyClassNames(divElements, expectedClasses);
+    expect(verifyClassNames(divElements, expectedClasses)).toBe(true);
   });
 
   it('renders the correct classes for score 4', () => {
@@ -102,6 +104,6 @@ describe('ProgressBar Component', () => {
       scoreStyle[4],
     ] as string[];
 
-    verifyClassNames(divElements, expectedClasses);
+    expect(verifyClassNames(divElements, expectedClasses)).toBe(true);
   });
 });

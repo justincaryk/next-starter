@@ -2,7 +2,9 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true,
+    "cypress/globals": true
   },
   "settings": {
     "react": {
@@ -23,7 +25,8 @@
   "plugins": [
     "@typescript-eslint",
     "@next/eslint-plugin-next", // https://github.com/vercel/next.js/blob/canary/packages/eslint-plugin-next/lib/index.js
-    "jsx-a11y"
+    "jsx-a11y",
+    "cypress"
   ],
 
   // all configs (eslint-config-xxx) go here:
@@ -35,7 +38,9 @@
     "plugin:@next/next/recommended",
     "next", // https://github.com/vercel/next.js/blob/canary/packages/eslint-config-next/package.json
     "next/core-web-vitals",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:jest/recommended",
+    "plugin:jest/style"
   ],
   "rules": {
     "@next/next/no-img-element": "off",
