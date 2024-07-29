@@ -3,8 +3,7 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "jest": true,
-    "cypress/globals": true
+    "jest": true
   },
   "settings": {
     "react": {
@@ -26,7 +25,7 @@
     "@typescript-eslint",
     "@next/eslint-plugin-next", // https://github.com/vercel/next.js/blob/canary/packages/eslint-plugin-next/lib/index.js
     "jsx-a11y",
-    "cypress"
+    "jest"
   ],
 
   // all configs (eslint-config-xxx) go here:

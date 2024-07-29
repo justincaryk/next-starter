@@ -12,3 +12,7 @@ package-lock.json
 .swc
 
 .env
+
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
