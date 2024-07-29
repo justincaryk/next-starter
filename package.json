@@ -15,8 +15,8 @@
     "lint:fix": "yarn lint --fix .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "cypress:open": "cypress open --config-file ./cypress/cypress.config.js",
-    "cypress:run": "cypress run --config-file ./cypress/cypress.config.js"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --browser chrome"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@axe-core/react": "^4.9.1",
-    "@cypress-audit/pa11y": "^1.4.2",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
     "@testing-library/dom": "^10.3.2",
     "@testing-library/jest-dom": "^6.4.6",
@@ -50,7 +49,9 @@
     "@types/react-dom": "^18",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
+    "axe-core": "^4.10.0",
     "cypress": "^13.13.1",
+    "cypress-axe": "^1.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "^9.1.0",

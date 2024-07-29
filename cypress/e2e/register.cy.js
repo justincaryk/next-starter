@@ -4,6 +4,8 @@ const EMAIL_EXISTS = 'email@exists.com';
 describe('SignupPage', () => {
   beforeEach(() => {
     cy.visit('/signup'); // Adjust the route if different
+    // Inject axe-core
+    cy.injectAxe();
   });
 
   it('should render the SignupPage with the registration form', () => {
@@ -12,8 +14,11 @@ describe('SignupPage', () => {
     cy.get('input[name="email"]').should('exist');
     cy.get('input[name="password"]').should('exist');
     cy.contains('button', 'Register').should('exist');
+
     cy.contains('Already a user?').should('exist');
     cy.contains('Log in').should('exist');
+
+    cy.checkA11y();
   });
 
   it('should submit the form with valid data and show the success message', () => {
@@ -30,6 +35,8 @@ describe('SignupPage', () => {
 
     cy.contains('You just joined').should('exist');
     cy.contains('Continue to profile setup').should('exist');
+
+    cy.checkA11y();
   });
 
   it('should show an error message if the email is already in use', () => {
@@ -45,5 +52,7 @@ describe('SignupPage', () => {
     cy.wait('@registerUserEmailExists');
 
     cy.contains('Email is in use. Try another or log in').should('exist');
+
+    cy.checkA11y();
   });
 });

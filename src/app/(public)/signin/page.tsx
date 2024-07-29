@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import SignInForm from '@/components/login/login-form';
+import AuthSwitchFooter from '@/components/parts/auth-switch-footer';
 import PageTitle from '@/components/parts/page-title';
 import { COMPANY_NAME, ROUTES } from '@/constants';
 
@@ -20,14 +20,11 @@ export default function SigninPage() {
 
       <SignInForm onSuccess={onFormSubmitSuccess} />
 
-      <div className="w-full">
-        <div className="pt-4 border-t flex justify-center text-sm">
-          New to {COMPANY_NAME}? &nbsp;{' '}
-          <Link href={ROUTES.SIGNUP} className="underline cursor-pointer" role="link">
-            Create an account
-          </Link>
-        </div>
-      </div>
+      <AuthSwitchFooter
+        to={ROUTES.SIGNUP}
+        text={`New to ${COMPANY_NAME}?`}
+        linkText="Create an account"
+      />
     </div>
   );
 }

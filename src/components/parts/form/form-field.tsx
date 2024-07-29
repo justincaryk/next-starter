@@ -41,7 +41,12 @@ const FormField = React.forwardRef(
           <Input errors={errors} name={name} {...rest} ref={ref} aria-describedby={name} />
         )}
 
-        <div className="text-red-error " role="alert" aria-label={name}>
+        <div
+          className="text-red-error "
+          role="alert"
+          aria-label={name}
+          data-testid={`signin-input-error-${name}`}
+        >
           {errors?.message}
         </div>
       </div>
