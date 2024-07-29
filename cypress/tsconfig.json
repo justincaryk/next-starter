@@ -8,7 +8,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "cypress.config.ts" // Adjust the config file extension if needed
+    "cypress.config.js" // Adjust the config file extension if needed
   ],
   "exclude": [
     "../node_modules", // Ensure node_modules in the root is excluded

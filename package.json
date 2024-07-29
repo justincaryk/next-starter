@@ -15,7 +15,8 @@
     "lint:fix": "yarn lint --fix .",
     "test": "jest",
     "test:watch": "jest --watch",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open --config-file ./cypress/cypress.config.js",
+    "cypress:run": "cypress run --config-file ./cypress/cypress.config.js"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",

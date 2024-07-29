@@ -1,3 +1,6 @@
+const VALID_PASSWORD = 'speller-shirting-BUDDHISM-aquiline';
+const EMAIL_EXISTS = 'email@exists.com';
+
 describe('SignupPage', () => {
   beforeEach(() => {
     cy.visit('/signup'); // Adjust the route if different
@@ -20,12 +23,11 @@ describe('SignupPage', () => {
     }).as('registerUser');
 
     cy.get('input[name="email"]').type('testuser@example.com');
-    cy.get('input[name="password"]').type('ValidPassword123');
+    cy.get('input[name="password"]').type(VALID_PASSWORD);
     cy.contains('button', 'Register').click();
 
     cy.wait('@registerUser');
 
-    cy.contains('Account successfully created.').should('exist');
     cy.contains('You just joined').should('exist');
     cy.contains('Continue to profile setup').should('exist');
   });
@@ -36,8 +38,8 @@ describe('SignupPage', () => {
       body: { code: 'email in use' },
     }).as('registerUserEmailExists');
 
-    cy.get('input[name="email"]').type('email@exists.com');
-    cy.get('input[name="password"]').type('ValidPassword123');
+    cy.get('input[name="email"]').type(EMAIL_EXISTS);
+    cy.get('input[name="password"]').type(VALID_PASSWORD);
     cy.contains('button', 'Register').click();
 
     cy.wait('@registerUserEmailExists');

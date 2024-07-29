@@ -1,16 +1,10 @@
-require('@cypress-audit/pa11y/commands');
-
-const { defineConfig } = require('cypress');
-
-// this package has a typescript bug and must remain a JS file.
-// see: https://github.com/mfrachet/cypress-audit/issues/230
 const { pa11y, prepareAudit } = require('@cypress-audit/pa11y');
 
-export default defineConfig({
+module.exports = {
   e2e: {
     baseUrl: 'http://localhost:3000', // this is your app
-    setupNodeEvents(on) {
-      on('before:browser:launch', (_, launchOptions) => {
+    setupNodeEvents(on, config) {
+      on('before:browser:launch', (browser = {}, launchOptions) => {
         prepareAudit(launchOptions);
       });
 
@@ -19,4 +13,4 @@ export default defineConfig({
       });
     },
   },
-});
+};
