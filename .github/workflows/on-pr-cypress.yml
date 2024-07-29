@@ -20,14 +20,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install
+          yarn
           npx cypress install
 
       - name: Start application server
-        run: npm start &
+        run: yarn dev &
         env:
           NODE_ENV: development
-        working-directory: ./path-to-your-app
 
       - name: Wait for server to start
         run: |
@@ -36,4 +35,4 @@ jobs:
           WAIT_ON_TIMEOUT: 60 # Adjust as necessary
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: yarn cypress:run

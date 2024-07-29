@@ -16,7 +16,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run --config-file ./cypress/cypress.config.js --browser chrome"
+    "cypress:run": "cypress run --browser chrome"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
