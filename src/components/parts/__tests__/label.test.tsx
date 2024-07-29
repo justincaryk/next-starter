@@ -1,5 +1,7 @@
 import '@testing-library/jest-dom';
 
+import { axe } from 'jest-axe';
+
 import { render, screen } from '@testing-library/react';
 import Label from '../form/label';
 
@@ -11,6 +13,13 @@ describe('Label component', () => {
   test('renders the label with the correct text', () => {
     render(<Label text="Username" htmlFor="username-input" />);
     expect(screen.getByText('Username')).toBeInTheDocument();
+  });
+
+  it('axe accessibility should be happy', async () => {
+    render(<Label text="Username" htmlFor="username-input" />);
+
+    const labelElement = screen.getByText('Username');
+    expect(await axe(labelElement)).toHaveNoViolations();
   });
 
   test('sets the htmlFor attribute correctly', () => {

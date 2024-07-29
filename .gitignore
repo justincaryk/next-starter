@@ -10,3 +10,9 @@ package-lock.json
 .clj-kondo
 .lsp
 .swc
+
+.env
+
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/

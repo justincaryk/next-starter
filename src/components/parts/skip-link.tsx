@@ -10,7 +10,7 @@ interface SkipLinkProps {
 export default function SkipLink({ href, skipLinkText, className = '' }: SkipLinkProps) {
   const classes = twMerge('sr-only focus:not-sr-only focus:underline text-lg', className);
   return (
-    <a className={classes} href={href} role="link">
+    <a className={classes} href={href}>
       {skipLinkText}
     </a>
   );

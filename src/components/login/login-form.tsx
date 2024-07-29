@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { AUTH_FORM_FIELDS, SigninSchema } from '@/app/(public)/types';
 import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
-import { sleep } from '@/utils';
+import { sleep } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // TESTING ONLY:

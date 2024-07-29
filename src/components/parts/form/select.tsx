@@ -52,7 +52,8 @@ const Dropdown = React.forwardRef(({ options, onClick }: DropdownProps, ref) => 
       >
         <div className="py-1" role="none">
           {/* <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" --> */}
-          <a
+          {/* TODO accessibility issue: */}
+          {/* <a
             href="#"
             className="block px-4 py-2 text-sm text-gray-700"
             role="menuitem"
@@ -78,7 +79,7 @@ const Dropdown = React.forwardRef(({ options, onClick }: DropdownProps, ref) => 
             id="menu-item-2"
           >
             License
-          </a>
+          </a> */}
           <form method="POST" action="#" role="none">
             <button
               type="submit"
