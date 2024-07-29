@@ -9,7 +9,7 @@ import * as Yup from 'yup';
 import { AUTH_FORM_FIELDS, SigninSchema } from '@/app/(public)/types';
 import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
-import { sleep } from '@/utils/utils';
+// import { sleep } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 // TESTING ONLY:
@@ -34,8 +34,6 @@ export default function LoginForm({ onSuccess }: LoginProps) {
 
   const trySubmit = async (data: Yup.InferType<typeof SigninSchema>) => {
     console.log('data: ', data);
-    // TODO: remove artificial timeout
-    await sleep(2500);
 
     try {
       const res = await fetch('/api/sign-in', {
@@ -48,8 +46,8 @@ export default function LoginForm({ onSuccess }: LoginProps) {
 
       if (status === 200) {
         if (result.code === 'ok') {
-          // TODO: remove artificial timeout
-          await sleep(1500);
+          // artificial sleep timer for debugging transition states
+          // await sleep(1500);
           onSuccess();
         } else if (result.code === 'invalid credentials') {
           setSigninError('The email or password is incorrect');

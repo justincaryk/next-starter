@@ -10,7 +10,7 @@ import { AUTH_FORM_FIELDS, SignupSchema, weakPasswordErrorMsg } from '@/app/(pub
 import Button from '@/components/parts/form/button';
 import FormField from '@/components/parts/form/form-field';
 import ProgressBar from '@/components/parts/progress-bar';
-import { sleep } from '@/utils/utils';
+// import { sleep } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   FeedbackType,
@@ -45,7 +45,8 @@ export default function RegisterForm({ onSuccess }: RegisterFormProps) {
   const [passwordScore, setPasswordScore] = useState<Score>(0);
 
   const trySubmit = async (data: Yup.InferType<typeof SignupSchema>) => {
-    await sleep(4000);
+    // artificial sleep timer for debugging transition states
+    // await sleep(4000);
 
     try {
       const res = await fetch('/api/register-user', {
