@@ -1,32 +1,25 @@
 import { BaseHTMLAttributes, KeyboardEvent } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+export const baseCardStyles =
+  'rounded-lg px-4 py-2 cursor-pointer shadow-slate-500 border-none shadow-md';
+export const hoverCardStyles = 'hover:shadow-orange-pop';
+export const inactiveCardStyles = 'bg-blue-dark text-white';
+export const activeCardStyles = 'bg-green-md text-black';
+
 interface CardProps extends BaseHTMLAttributes<HTMLLIElement> {
   onClick?: () => void;
-  i: number;
   active?: boolean;
   className?: string;
   id?: string;
   children?: string | React.ReactNode;
 }
 
-export default function Card({
-  onClick,
-  i,
-  id,
-  active = false,
-  className = '',
-  children,
-}: CardProps) {
-  const baseStyles = 'rounded-lg px-4 py-2 cursor-pointer shadow-lg border';
-  const hoverStyles = 'hover:bg-blue-light hover:text-blue-dark hover:border-blue-light';
-  const inactiveStyles = 'border-blue-dark bg-blue-dark text-white';
-  const activeStyles = 'border-green-dark bg-green-dark text-white';
-
+export default function Card({ onClick, id, active = false, className = '', children }: CardProps) {
   const classes = twMerge(
-    baseStyles,
-    active ? activeStyles : inactiveStyles,
-    hoverStyles,
+    baseCardStyles,
+    active ? activeCardStyles : inactiveCardStyles,
+    hoverCardStyles,
     className,
   );
 
@@ -47,7 +40,7 @@ export default function Card({
       {...(onClick
         ? {
             onClick: onClick,
-            tabIndex: i + 1,
+            tabIndex: 0,
             onKeyDown: onEnter,
             'aria-pressed': active,
             'aria-live': 'polite',

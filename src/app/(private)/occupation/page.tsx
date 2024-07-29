@@ -44,10 +44,9 @@ export default function Occupation() {
         className="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-x-4 sm:gap-y-4"
         role="group"
       >
-        {industries.map((industry, i) => (
+        {industries.map((industry) => (
           <Card
             key={industry.id}
-            i={i}
             active={industry.id === userIndustry?.id}
             onClick={() => handleIndustryClick(industry)}
           >

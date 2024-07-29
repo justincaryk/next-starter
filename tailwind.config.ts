@@ -36,6 +36,7 @@ const config: Config = {
       fontWeight: {
         'extra-bold': '800',
       },
+      // boxShadow
     },
   },
   plugins: [],

@@ -7,7 +7,7 @@ import { ROUTES } from '@/constants';
 
 export default function Home() {
   return (
-    <main className="mt-20">
+    <div className="mt-20">
       <div className="w-full flex justify-center items-center flex-col">
         <div className="w-2/3 space-y-10">
           <div className="space-y-4">
@@ -39,6 +39,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

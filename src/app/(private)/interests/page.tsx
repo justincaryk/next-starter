@@ -49,7 +49,6 @@ export default function Interests() {
           <Card
             key={opt.id}
             id={`card-${i + 1}`}
-            i={i}
             onClick={() => handleInterestClick(opt)}
             active={userInterestIds.includes(opt.id)}
           >
