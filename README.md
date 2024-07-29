@@ -45,41 +45,17 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
 
 ### Accessibility Checklist:
 
-#### screen-reader
+Automated testing has been added to help mitigate any potential obvious accessibility issues. Specifics include:
 
-- keyboard navigation is fully supported
-- forms:
-  - `label.for` = `input.id` (tradeoff: the forms are super basic at this point, so it is just using the field name value. id collision concerns will need to be addressed if the app ever implemented multiple forms in a single DOM page)
-  - `react-hook-form` recommends using A11y standard (screen reader):
-    - `aria-invalid` - added to inputs
-    - `role="alert"` - added to error fields
-    - `aria-live="polite"` - added to password
-    - linked password hint text with password input
-- cards
-  - are composed with `<ul>`/`<li>`
-  - added `role='button'` to communicate clickability
-- skip links
+- axe core executes a page test and consoles errors in the browser during active local development
+- linting extensions include `pa11y` to help catch issues prior to commit and merging
+- color contrast testing assisted by `pa11y`
+- screen-reader testing performed to ensure keyboard navigation works
+- skip links have been added to assist keyboard users with quicker navigation
 
-### color-blindness
+### REPO NOTES:
 
-- I did a quick check of the color theme for color blindness, but I didn't go too deeply into it. On my past teams, this has been handled by UX designers.
-- Specific color choices may not be exceptional, but the differences between default, hover, and active states for components are clear and stark.
-
-### Testing
-
-- [] Input test
-- [] Form Field test
-- [] Progress bar test
-- [] API tests? (they're really just mocks, so not sure it's worth it)
-
-### Thoughts & Considerations
-
-- There is definitely some refactoring that would be done in a production app, including:
-  - `components/[feature]/[chunk]`
-  - `components/apis/[endpoint]` // typed wrappers around generic fetch component
-  - `components/apis/base.ts` // an abstract fetch component
-- Since there was no db requirement, the front end does not include an auth provider for route protection. I considered doing a proper implementation of something like `next-auth` to add this functionality, but it felt excessive given the requested scope.
-- Since all auth APIs are just mocks, I added a few emails that can be added to trigger various validation results:
+- APIs are currently just mocks, there are a few emails that can be used to trigger various validation results:
   - Signin
     - `email@exists.com` will return "ok" and move forward
     - `email@no-exist.com` will return "no user found"
@@ -87,20 +63,15 @@ Given time constraints and a lack of cryptography expertise, I integrated the `@
   - Signup
     - `email@exists.com` will return "email already exists"
     - all others will reutrn "ok" and move forward
-- Given time considerations, I did not mock any APIs for interests or occupations. With more time, some things to build would be
-  - Submitting occupation
-  - On the interests page, the interests API could have:
-    - Trimmed interest list based on user's occupation
-    - Reordered the interests list such that likely interests given the user's occupation are presented first
-- Mock data can be found in `/src/mocks.ts`
+- Mock data can be found in `/src/mocks.ts`: this should be removed or extracted to the API layer
 
 ### TODO:
 
-- [] update card colors for better accessibility
+- [x] update card colors for better accessibility
 - [] SSO
 - [] forgot password
-- [] add automated accessibility testing
+- [x] add automated accessibility testing
 - [] finish select dropdown component + tests
 - [] finish checkbox component + tests
 - [] add form tests
-- [] add success state tests for signup page
+- [x] add success state tests for signup page
