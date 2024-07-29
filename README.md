@@ -68,10 +68,10 @@ Automated testing has been added to help mitigate any potential obvious accessib
 ### TODO:
 
 - [x] update card colors for better accessibility
-- [] SSO
-- [] forgot password
+- [x] add success state tests for signup page
 - [x] add automated accessibility testing
 - [] finish select dropdown component + tests
 - [] finish checkbox component + tests
-- [] add form tests
-- [x] add success state tests for signup page
+- [] write some integration tests
+- [] SSO
+- [] forgot password
