@@ -13,14 +13,14 @@ export default function RegisterSuccess() {
       aria-live="polite"
       title="Account successfully created."
     >
-      <div className="pb-6 inline-block">
+      <div className="pb-6 inline-block text-blue-x-dark">
         <div className="bg-green-md rounded-t-lg py-4">
           <div className="flex justify-center">
             <div className="inline-block -mt-10 rounded-full bg-green-md p-1 border-4 border-white">
-              <CheckIcon className="text-white w-10" />
+              <CheckIcon className="w-10" />
             </div>
           </div>
-          <div className="w-full block text-3xl text-center text-white font-bold">Success!</div>
+          <div className="w-full block text-3xl text-center font-bold">Success!</div>
         </div>
         <div className="px-6 pb-6 space-y-4 border-b border-l border-r rounded-lg">
           <PageTitle text={`You just joined ${COMPANY_NAME}!`} className="text-center pt-4" />
